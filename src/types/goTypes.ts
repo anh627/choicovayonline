@@ -1,5 +1,8 @@
+export type Player = 0 | 1 | 2; // 0 = empty, 1 = black, 2 = white
+export type BoardSize = 9 | 13 | 19;
+
 export interface GameMove {
-  player: number;
+  player: Player;
   row: number;
   col: number;
   timestamp: number;
@@ -9,7 +12,7 @@ export interface GameMove {
 
 export interface Territory {
   points: [number, number][];
-  owner: number; // 0 = neutral, 1 = black, 2 = white
+  owner: Player; // 0 = neutral
 }
 
 export interface GameScore {
@@ -17,4 +20,15 @@ export interface GameScore {
   whiteScore: number;
   blackTerritory: number;
   whiteTerritory: number;
+}
+
+export interface GameState {
+  board: Player[][];
+  currentPlayer: Player;
+  blackCaptures: number;
+  whiteCaptures: number;
+  moveHistory: GameMove[];
+  passCount: number;
+  gameStatus: 'Playing' | 'Finished';
+  koPosition: { row: number; col: number } | null;
 }
